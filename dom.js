@@ -38,9 +38,10 @@
 // let head = document.querySelector('#main-header');
 // head.style.borderBottom = '4px solid #ccc'
 let form = document.getElementById('addForm');
-let ul =document.getElementById('items');
+let ul = document.getElementById('items');
+let btn  = document.getElementsByClassName('btn btn-danger btn-sm float-right delete');
 form.addEventListener('submit', addItem);
-
+ul.addEventListener('click', removeItem);
 function addItem(e) {
     e.preventDefault();
     console.log(1);
@@ -48,6 +49,19 @@ function addItem(e) {
     let li = document.createElement('li');
     li.className = 'list-group-item';
     console.log(li);
+    let bton = document.createElement('button');
+    bton .className ='btn btn-danger btn-sm float-right delete';
+    bton.appendChild(document.createTextNode('X'));
     li.appendChild(document.createTextNode(newItem));
+    li.appendChild(bton);
     ul.appendChild(li);
+}
+
+function removeItem(e) {
+    if(e.target.classList.contains('delete')){
+        if(confirm('Delete??')) {
+         let li = e.target.parentElement;
+         ul.removeChild(li);
+        }
+    }
 }
